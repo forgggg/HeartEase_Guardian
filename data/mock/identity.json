@@ -1,0 +1,24 @@
+{
+  "mode": "mock",
+  "default_user": "teacher_001",
+  "users": {
+    "teacher_001": {
+      "id": "teacher_001",
+      "name": "张辅导员",
+      "role": "counselor",
+      "student_scope": ["*"]
+    },
+    "teacher_002": {
+      "id": "teacher_002",
+      "name": "李辅导员",
+      "role": "counselor",
+      "student_scope": ["2022107000"]
+    },
+    "student_001": {
+      "id": "student_001",
+      "name": "张晨",
+      "role": "student",
+      "student_scope": ["202210700001"]
+    }
+  }
+}

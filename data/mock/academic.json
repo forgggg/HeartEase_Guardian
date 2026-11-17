@@ -1,0 +1,962 @@
+{
+  "202210700001": {
+    "gpa": 3.57,
+    "rank": "28/96",
+    "cet4": 528,
+    "cet6": 0,
+    "courses": [
+      {
+        "name": "Java 程序设计",
+        "score": 94.5,
+        "credit": 4.0
+      },
+      {
+        "name": "软件工程",
+        "score": 88.3,
+        "credit": 2.0
+      },
+      {
+        "name": "计算机网络",
+        "score": 83.3,
+        "credit": 3.0
+      },
+      {
+        "name": "操作系统",
+        "score": 81.9,
+        "credit": 4.0
+      },
+      {
+        "name": "数据库原理",
+        "score": 79.8,
+        "credit": 4.0
+      },
+      {
+        "name": "算法设计与分析",
+        "score": 85.8,
+        "credit": 4.0
+      },
+      {
+        "name": "Python 数据分析",
+        "score": 87.3,
+        "credit": 3.0
+      },
+      {
+        "name": "机器学习基础",
+        "score": 87.9,
+        "credit": 4.0
+      }
+    ]
+  },
+  "202210700002": {
+    "gpa": 3.17,
+    "rank": "23/96",
+    "cet4": 496,
+    "cet6": 0,
+    "courses": [
+      {
+        "name": "编译原理",
+        "score": 91.6,
+        "credit": 2.0
+      },
+      {
+        "name": "Java 程序设计",
+        "score": 88.3,
+        "credit": 2.0
+      },
+      {
+        "name": "数据库原理",
+        "score": 93.2,
+        "credit": 3.0
+      },
+      {
+        "name": "计算机网络",
+        "score": 79.1,
+        "credit": 4.0
+      },
+      {
+        "name": "软件工程",
+        "score": 78.6,
+        "credit": 2.0
+      },
+      {
+        "name": "Python 数据分析",
+        "score": 97.8,
+        "credit": 4.0
+      },
+      {
+        "name": "算法设计与分析",
+        "score": 89.1,
+        "credit": 3.0
+      },
+      {
+        "name": "机器学习基础",
+        "score": 85.8,
+        "credit": 4.0
+      }
+    ]
+  },
+  "202210700003": {
+    "gpa": 3.5,
+    "rank": "27/96",
+    "cet4": 487,
+    "cet6": 476,
+    "courses": [
+      {
+        "name": "机器学习基础",
+        "score": 83.3,
+        "credit": 4.0
+      },
+      {
+        "name": "算法设计与分析",
+        "score": 93.8,
+        "credit": 3.0
+      },
+      {
+        "name": "数据结构",
+        "score": 80.7,
+        "credit": 4.0
+      },
+      {
+        "name": "Java 程序设计",
+        "score": 95.5,
+        "credit": 3.0
+      },
+      {
+        "name": "Python 数据分析",
+        "score": 78.9,
+        "credit": 4.0
+      },
+      {
+        "name": "编译原理",
+        "score": 86.8,
+        "credit": 4.0
+      },
+      {
+        "name": "软件工程",
+        "score": 90.9,
+        "credit": 4.0
+      },
+      {
+        "name": "操作系统",
+        "score": 92.6,
+        "credit": 2.0
+      }
+    ]
+  },
+  "202210700004": {
+    "gpa": 3.33,
+    "rank": "10/96",
+    "cet4": 528,
+    "cet6": 0,
+    "courses": [
+      {
+        "name": "数据结构",
+        "score": 93.8,
+        "credit": 2.0
+      },
+      {
+        "name": "编译原理",
+        "score": 96.9,
+        "credit": 3.0
+      },
+      {
+        "name": "机器学习基础",
+        "score": 92.1,
+        "credit": 4.0
+      },
+      {
+        "name": "计算机网络",
+        "score": 89.1,
+        "credit": 3.0
+      },
+      {
+        "name": "数据库原理",
+        "score": 81.2,
+        "credit": 3.0
+      },
+      {
+        "name": "软件工程",
+        "score": 86.3,
+        "credit": 2.0
+      },
+      {
+        "name": "Java 程序设计",
+        "score": 81.9,
+        "credit": 3.0
+      },
+      {
+        "name": "Python 数据分析",
+        "score": 83.7,
+        "credit": 3.0
+      }
+    ]
+  },
+  "202210700005": {
+    "gpa": 3.46,
+    "rank": "7/96",
+    "cet4": 528,
+    "cet6": 452,
+    "courses": [
+      {
+        "name": "Python 数据分析",
+        "score": 85.9,
+        "credit": 2.0
+      },
+      {
+        "name": "数据库原理",
+        "score": 79.4,
+        "credit": 4.0
+      },
+      {
+        "name": "编译原理",
+        "score": 84.4,
+        "credit": 3.0
+      },
+      {
+        "name": "算法设计与分析",
+        "score": 97.4,
+        "credit": 3.0
+      },
+      {
+        "name": "数据结构",
+        "score": 94.3,
+        "credit": 4.0
+      },
+      {
+        "name": "计算机网络",
+        "score": 97.1,
+        "credit": 4.0
+      },
+      {
+        "name": "机器学习基础",
+        "score": 80.4,
+        "credit": 2.0
+      },
+      {
+        "name": "软件工程",
+        "score": 98.0,
+        "credit": 3.0
+      }
+    ]
+  },
+  "202210700006": {
+    "gpa": 3.82,
+    "rank": "15/96",
+    "cet4": 551,
+    "cet6": 0,
+    "courses": [
+      {
+        "name": "Java 程序设计",
+        "score": 96.7,
+        "credit": 3.0
+      },
+      {
+        "name": "计算机网络",
+        "score": 89.3,
+        "credit": 2.0
+      },
+      {
+        "name": "数据库原理",
+        "score": 96.1,
+        "credit": 2.0
+      },
+      {
+        "name": "操作系统",
+        "score": 78.7,
+        "credit": 2.0
+      },
+      {
+        "name": "Python 数据分析",
+        "score": 89.5,
+        "credit": 3.0
+      },
+      {
+        "name": "机器学习基础",
+        "score": 79.6,
+        "credit": 2.0
+      },
+      {
+        "name": "算法设计与分析",
+        "score": 79.2,
+        "credit": 4.0
+      },
+      {
+        "name": "数据结构",
+        "score": 92.0,
+        "credit": 4.0
+      }
+    ]
+  },
+  "202210700007": {
+    "gpa": 3.38,
+    "rank": "25/96",
+    "cet4": 0,
+    "cet6": 452,
+    "courses": [
+      {
+        "name": "机器学习基础",
+        "score": 82.0,
+        "credit": 4.0
+      },
+      {
+        "name": "软件工程",
+        "score": 87.8,
+        "credit": 3.0
+      },
+      {
+        "name": "Java 程序设计",
+        "score": 84.4,
+        "credit": 2.0
+      },
+      {
+        "name": "数据结构",
+        "score": 80.0,
+        "credit": 2.0
+      },
+      {
+        "name": "Python 数据分析",
+        "score": 94.0,
+        "credit": 2.0
+      },
+      {
+        "name": "编译原理",
+        "score": 82.0,
+        "credit": 2.0
+      },
+      {
+        "name": "数据库原理",
+        "score": 83.1,
+        "credit": 3.0
+      },
+      {
+        "name": "计算机网络",
+        "score": 94.4,
+        "credit": 2.0
+      }
+    ]
+  },
+  "202210700008": {
+    "gpa": 3.12,
+    "rank": "14/96",
+    "cet4": 0,
+    "cet6": 0,
+    "courses": [
+      {
+        "name": "计算机网络",
+        "score": 94.9,
+        "credit": 2.0
+      },
+      {
+        "name": "Java 程序设计",
+        "score": 91.4,
+        "credit": 4.0
+      },
+      {
+        "name": "数据结构",
+        "score": 86.9,
+        "credit": 4.0
+      },
+      {
+        "name": "Python 数据分析",
+        "score": 82.2,
+        "credit": 2.0
+      },
+      {
+        "name": "软件工程",
+        "score": 93.0,
+        "credit": 3.0
+      },
+      {
+        "name": "编译原理",
+        "score": 90.5,
+        "credit": 3.0
+      },
+      {
+        "name": "机器学习基础",
+        "score": 84.5,
+        "credit": 2.0
+      },
+      {
+        "name": "数据库原理",
+        "score": 92.4,
+        "credit": 2.0
+      }
+    ]
+  },
+  "202210700009": {
+    "gpa": 3.28,
+    "rank": "11/96",
+    "cet4": 528,
+    "cet6": 476,
+    "courses": [
+      {
+        "name": "计算机网络",
+        "score": 87.5,
+        "credit": 2.0
+      },
+      {
+        "name": "Java 程序设计",
+        "score": 95.6,
+        "credit": 2.0
+      },
+      {
+        "name": "机器学习基础",
+        "score": 94.1,
+        "credit": 3.0
+      },
+      {
+        "name": "操作系统",
+        "score": 93.9,
+        "credit": 3.0
+      },
+      {
+        "name": "软件工程",
+        "score": 93.0,
+        "credit": 3.0
+      },
+      {
+        "name": "数据结构",
+        "score": 85.7,
+        "credit": 2.0
+      },
+      {
+        "name": "算法设计与分析",
+        "score": 86.5,
+        "credit": 3.0
+      },
+      {
+        "name": "数据库原理",
+        "score": 92.8,
+        "credit": 2.0
+      }
+    ]
+  },
+  "202210700010": {
+    "gpa": 3.48,
+    "rank": "23/96",
+    "cet4": 0,
+    "cet6": 503,
+    "courses": [
+      {
+        "name": "数据库原理",
+        "score": 96.6,
+        "credit": 2.0
+      },
+      {
+        "name": "软件工程",
+        "score": 80.1,
+        "credit": 2.0
+      },
+      {
+        "name": "编译原理",
+        "score": 88.3,
+        "credit": 3.0
+      },
+      {
+        "name": "Python 数据分析",
+        "score": 91.5,
+        "credit": 4.0
+      },
+      {
+        "name": "操作系统",
+        "score": 81.6,
+        "credit": 4.0
+      },
+      {
+        "name": "Java 程序设计",
+        "score": 93.8,
+        "credit": 2.0
+      },
+      {
+        "name": "算法设计与分析",
+        "score": 89.6,
+        "credit": 2.0
+      },
+      {
+        "name": "数据结构",
+        "score": 84.3,
+        "credit": 3.0
+      }
+    ]
+  },
+  "202210700011": {
+    "gpa": 3.82,
+    "rank": "16/96",
+    "cet4": 528,
+    "cet6": 0,
+    "courses": [
+      {
+        "name": "操作系统",
+        "score": 80.8,
+        "credit": 4.0
+      },
+      {
+        "name": "软件工程",
+        "score": 78.6,
+        "credit": 2.0
+      },
+      {
+        "name": "机器学习基础",
+        "score": 79.3,
+        "credit": 2.0
+      },
+      {
+        "name": "编译原理",
+        "score": 80.3,
+        "credit": 3.0
+      },
+      {
+        "name": "数据库原理",
+        "score": 92.3,
+        "credit": 4.0
+      },
+      {
+        "name": "算法设计与分析",
+        "score": 88.5,
+        "credit": 3.0
+      },
+      {
+        "name": "Java 程序设计",
+        "score": 96.9,
+        "credit": 2.0
+      },
+      {
+        "name": "Python 数据分析",
+        "score": 84.3,
+        "credit": 4.0
+      }
+    ]
+  },
+  "202210700012": {
+    "gpa": 3.36,
+    "rank": "23/96",
+    "cet4": 487,
+    "cet6": 503,
+    "courses": [
+      {
+        "name": "软件工程",
+        "score": 78.9,
+        "credit": 3.0
+      },
+      {
+        "name": "Java 程序设计",
+        "score": 78.2,
+        "credit": 3.0
+      },
+      {
+        "name": "机器学习基础",
+        "score": 78.1,
+        "credit": 3.0
+      },
+      {
+        "name": "编译原理",
+        "score": 86.8,
+        "credit": 2.0
+      },
+      {
+        "name": "数据结构",
+        "score": 81.6,
+        "credit": 4.0
+      },
+      {
+        "name": "数据库原理",
+        "score": 82.9,
+        "credit": 3.0
+      },
+      {
+        "name": "Python 数据分析",
+        "score": 79.1,
+        "credit": 3.0
+      },
+      {
+        "name": "计算机网络",
+        "score": 87.8,
+        "credit": 2.0
+      }
+    ]
+  },
+  "202210700013": {
+    "gpa": 3.48,
+    "rank": "23/96",
+    "cet4": 528,
+    "cet6": 476,
+    "courses": [
+      {
+        "name": "计算机网络",
+        "score": 80.3,
+        "credit": 4.0
+      },
+      {
+        "name": "机器学习基础",
+        "score": 78.7,
+        "credit": 4.0
+      },
+      {
+        "name": "编译原理",
+        "score": 96.5,
+        "credit": 2.0
+      },
+      {
+        "name": "Java 程序设计",
+        "score": 97.9,
+        "credit": 3.0
+      },
+      {
+        "name": "数据结构",
+        "score": 93.1,
+        "credit": 3.0
+      },
+      {
+        "name": "数据库原理",
+        "score": 92.0,
+        "credit": 3.0
+      },
+      {
+        "name": "软件工程",
+        "score": 87.7,
+        "credit": 3.0
+      },
+      {
+        "name": "算法设计与分析",
+        "score": 84.6,
+        "credit": 3.0
+      }
+    ]
+  },
+  "202210700014": {
+    "gpa": 3.41,
+    "rank": "12/96",
+    "cet4": 551,
+    "cet6": 503,
+    "courses": [
+      {
+        "name": "计算机网络",
+        "score": 89.8,
+        "credit": 3.0
+      },
+      {
+        "name": "机器学习基础",
+        "score": 94.0,
+        "credit": 3.0
+      },
+      {
+        "name": "数据库原理",
+        "score": 87.4,
+        "credit": 3.0
+      },
+      {
+        "name": "Python 数据分析",
+        "score": 86.8,
+        "credit": 4.0
+      },
+      {
+        "name": "算法设计与分析",
+        "score": 96.4,
+        "credit": 2.0
+      },
+      {
+        "name": "编译原理",
+        "score": 91.4,
+        "credit": 3.0
+      },
+      {
+        "name": "软件工程",
+        "score": 93.5,
+        "credit": 2.0
+      },
+      {
+        "name": "数据结构",
+        "score": 86.0,
+        "credit": 4.0
+      }
+    ]
+  },
+  "202210700015": {
+    "gpa": 3.67,
+    "rank": "5/96",
+    "cet4": 496,
+    "cet6": 0,
+    "courses": [
+      {
+        "name": "编译原理",
+        "score": 97.4,
+        "credit": 2.0
+      },
+      {
+        "name": "数据库原理",
+        "score": 97.2,
+        "credit": 2.0
+      },
+      {
+        "name": "数据结构",
+        "score": 84.6,
+        "credit": 4.0
+      },
+      {
+        "name": "计算机网络",
+        "score": 92.3,
+        "credit": 3.0
+      },
+      {
+        "name": "Python 数据分析",
+        "score": 88.7,
+        "credit": 4.0
+      },
+      {
+        "name": "机器学习基础",
+        "score": 81.6,
+        "credit": 3.0
+      },
+      {
+        "name": "Java 程序设计",
+        "score": 91.4,
+        "credit": 2.0
+      },
+      {
+        "name": "算法设计与分析",
+        "score": 83.3,
+        "credit": 4.0
+      }
+    ]
+  },
+  "202210700016": {
+    "gpa": 3.66,
+    "rank": "16/96",
+    "cet4": 551,
+    "cet6": 452,
+    "courses": [
+      {
+        "name": "数据库原理",
+        "score": 95.9,
+        "credit": 2.0
+      },
+      {
+        "name": "Python 数据分析",
+        "score": 97.6,
+        "credit": 4.0
+      },
+      {
+        "name": "计算机网络",
+        "score": 79.6,
+        "credit": 3.0
+      },
+      {
+        "name": "操作系统",
+        "score": 97.6,
+        "credit": 3.0
+      },
+      {
+        "name": "数据结构",
+        "score": 82.8,
+        "credit": 2.0
+      },
+      {
+        "name": "机器学习基础",
+        "score": 80.9,
+        "credit": 4.0
+      },
+      {
+        "name": "软件工程",
+        "score": 82.1,
+        "credit": 2.0
+      },
+      {
+        "name": "编译原理",
+        "score": 79.1,
+        "credit": 4.0
+      }
+    ]
+  },
+  "202210700017": {
+    "gpa": 3.31,
+    "rank": "25/96",
+    "cet4": 496,
+    "cet6": 476,
+    "courses": [
+      {
+        "name": "操作系统",
+        "score": 93.7,
+        "credit": 3.0
+      },
+      {
+        "name": "软件工程",
+        "score": 78.4,
+        "credit": 4.0
+      },
+      {
+        "name": "数据库原理",
+        "score": 84.8,
+        "credit": 2.0
+      },
+      {
+        "name": "编译原理",
+        "score": 81.7,
+        "credit": 2.0
+      },
+      {
+        "name": "数据结构",
+        "score": 95.6,
+        "credit": 3.0
+      },
+      {
+        "name": "计算机网络",
+        "score": 84.7,
+        "credit": 2.0
+      },
+      {
+        "name": "算法设计与分析",
+        "score": 97.9,
+        "credit": 2.0
+      },
+      {
+        "name": "Python 数据分析",
+        "score": 85.8,
+        "credit": 2.0
+      }
+    ]
+  },
+  "202210700018": {
+    "gpa": 3.79,
+    "rank": "26/96",
+    "cet4": 528,
+    "cet6": 476,
+    "courses": [
+      {
+        "name": "机器学习基础",
+        "score": 79.9,
+        "credit": 3.0
+      },
+      {
+        "name": "Python 数据分析",
+        "score": 84.4,
+        "credit": 4.0
+      },
+      {
+        "name": "Java 程序设计",
+        "score": 87.6,
+        "credit": 3.0
+      },
+      {
+        "name": "软件工程",
+        "score": 80.6,
+        "credit": 3.0
+      },
+      {
+        "name": "计算机网络",
+        "score": 79.2,
+        "credit": 3.0
+      },
+      {
+        "name": "编译原理",
+        "score": 94.5,
+        "credit": 4.0
+      },
+      {
+        "name": "操作系统",
+        "score": 92.1,
+        "credit": 2.0
+      },
+      {
+        "name": "数据结构",
+        "score": 94.8,
+        "credit": 3.0
+      }
+    ]
+  },
+  "202210700019": {
+    "gpa": 3.28,
+    "rank": "8/96",
+    "cet4": 496,
+    "cet6": 0,
+    "courses": [
+      {
+        "name": "数据库原理",
+        "score": 81.1,
+        "credit": 3.0
+      },
+      {
+        "name": "编译原理",
+        "score": 83.1,
+        "credit": 4.0
+      },
+      {
+        "name": "机器学习基础",
+        "score": 91.1,
+        "credit": 4.0
+      },
+      {
+        "name": "算法设计与分析",
+        "score": 97.1,
+        "credit": 3.0
+      },
+      {
+        "name": "计算机网络",
+        "score": 80.3,
+        "credit": 4.0
+      },
+      {
+        "name": "Python 数据分析",
+        "score": 96.1,
+        "credit": 2.0
+      },
+      {
+        "name": "软件工程",
+        "score": 81.8,
+        "credit": 2.0
+      },
+      {
+        "name": "Java 程序设计",
+        "score": 97.0,
+        "credit": 2.0
+      }
+    ]
+  },
+  "202210700020": {
+    "gpa": 3.63,
+    "rank": "21/96",
+    "cet4": 0,
+    "cet6": 452,
+    "courses": [
+      {
+        "name": "算法设计与分析",
+        "score": 84.5,
+        "credit": 4.0
+      },
+      {
+        "name": "操作系统",
+        "score": 91.6,
+        "credit": 2.0
+      },
+      {
+        "name": "软件工程",
+        "score": 80.1,
+        "credit": 2.0
+      },
+      {
+        "name": "机器学习基础",
+        "score": 96.5,
+        "credit": 2.0
+      },
+      {
+        "name": "计算机网络",
+        "score": 84.1,
+        "credit": 3.0
+      },
+      {
+        "name": "数据结构",
+        "score": 91.5,
+        "credit": 4.0
+      },
+      {
+        "name": "编译原理",
+        "score": 84.0,
+        "credit": 3.0
+      },
+      {
+        "name": "Java 程序设计",
+        "score": 79.3,
+        "credit": 2.0
+      }
+    ]
+  }
+}
