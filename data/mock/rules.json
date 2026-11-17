@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "thresholds": {
+    "min_bullet_chars": 10,
+    "max_bullet_chars": 60,
+    "min_preserve_ratio": 0.35,
+    "keyword_coverage_warn": 0.5
+  },
+  "rules": [
+    {"id": "R1", "name": "缺少量化结果", "severity": "medium", "rewritable": true},
+    {"id": "R2", "name": "弱动词开头", "severity": "medium", "rewritable": true},
+    {"id": "R3", "name": "缺少结果（STAR 的 Result）", "severity": "medium", "rewritable": true},
+    {"id": "R4", "name": "空话套话", "severity": "low", "rewritable": true},
+    {"id": "R5", "name": "单条过长", "severity": "low", "rewritable": true},
+    {"id": "R6", "name": "关键词未对齐", "severity": "low", "rewritable": false},
+    {"id": "R9", "name": "隐私信息", "severity": "high", "rewritable": false}
+  ]
+}

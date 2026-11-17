@@ -1,0 +1,17 @@
+{
+  "tech": {
+    "id": "tech",
+    "name": "技术岗 · 单页",
+    "sections": ["education", "skills", "projects", "internships", "certificates", "awards"]
+  },
+  "general": {
+    "id": "general",
+    "name": "通用 · 单页",
+    "sections": ["summary", "education", "skills", "projects", "internships", "certificates", "awards"]
+  },
+  "soe": {
+    "id": "soe",
+    "name": "国企 / 事业单位",
+    "sections": ["summary", "education", "internships", "projects", "certificates", "awards"]
+  }
+}
