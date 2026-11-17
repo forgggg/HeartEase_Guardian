@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "generated_at": "2026-11-17",
+  "data_as_of": "2026-11-16",
+  "source_file": "就业.xlsx",
+  "students": 20,
+  "note": "students/academic 由 freeze_mock.py 冻结；覆盖字段见 app/data/source.py REAL_FIELDS"
+}

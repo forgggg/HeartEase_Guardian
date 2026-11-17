@@ -1,0 +1,2598 @@
+{
+  "components": {
+    "schemas": {
+      "Analysis": {
+        "examples": [
+          {
+            "created_at": "2026-11-17T16:12:00",
+            "created_by": "teacher_001",
+            "filename": "resume_bad.docx",
+            "findings": [
+              {
+                "evidence": "以弱动词开头，改为动作动词并补结果",
+                "name": "弱动词开头",
+                "original": "负责用户调研并输出需求文档",
+                "rule": "R2",
+                "severity": "medium"
+              }
+            ],
+            "id": "anl_20261117161200_9f8e7d",
+            "original_text": "负责用户调研并输出需求文档\n联系电话 13800138000",
+            "quality": {
+              "findings": 7,
+              "keyword_coverage": 0.17,
+              "missing_keywords": [
+                "Spring",
+                "MySQL",
+                "Redis"
+              ],
+              "rules_version": 1,
+              "score": 46
+            },
+            "revised_text": "主导用户调研并输出需求文档\n联系电话 ",
+            "student_id": "202210700001",
+            "suggestions": [
+              {
+                "id": "s1",
+                "original": "负责用户调研并输出需求文档",
+                "reason": "动词开头，结果前置",
+                "revised": "主导用户调研并输出需求文档",
+                "rule": "R2",
+                "rules": [
+                  "R1",
+                  "R2"
+                ]
+              }
+            ],
+            "target_role": "Java 后端开发工程师"
+          }
+        ],
+        "properties": {
+          "created_at": {
+            "default": "",
+            "title": "Created At",
+            "type": "string"
+          },
+          "created_by": {
+            "default": "",
+            "title": "Created By",
+            "type": "string"
+          },
+          "filename": {
+            "default": "",
+            "title": "Filename",
+            "type": "string"
+          },
+          "findings": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/Finding"
+            },
+            "title": "Findings",
+            "type": "array"
+          },
+          "id": {
+            "default": "",
+            "title": "Id",
+            "type": "string"
+          },
+          "original_text": {
+            "default": "",
+            "title": "Original Text",
+            "type": "string"
+          },
+          "quality": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/QualityReport"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "revised_text": {
+            "default": "",
+            "title": "Revised Text",
+            "type": "string"
+          },
+          "student_id": {
+            "default": "",
+            "title": "Student Id",
+            "type": "string"
+          },
+          "suggestions": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/Suggestion"
+            },
+            "title": "Suggestions",
+            "type": "array"
+          },
+          "target_role": {
+            "default": "",
+            "title": "Target Role",
+            "type": "string"
+          }
+        },
+        "title": "Analysis",
+        "type": "object"
+      },
+      "AuditPage": {
+        "examples": [
+          {
+            "items": [
+              {
+                "action": "resume.patch",
+                "actor": "teacher_001",
+                "detail": {
+                  "confirmed": true,
+                  "note": "人工改稿",
+                  "version": 2
+                },
+                "id": "aud_20261117161200_1a2b3c",
+                "request_id": "d7ef09695b05",
+                "target_id": "res_20261117161000_ab12cd",
+                "target_type": "resume",
+                "ts": "2026-11-17T16:12:00"
+              },
+              {
+                "action": "resume.create",
+                "actor": "teacher_001",
+                "detail": {
+                  "llm_used": false,
+                  "target_role": "Java 后端开发工程师",
+                  "template": "tech"
+                },
+                "id": "aud_20261117161000_4d5e6f",
+                "request_id": "2296048a219a",
+                "target_id": "res_20261117161000_ab12cd",
+                "target_type": "resume",
+                "ts": "2026-11-17T16:10:00"
+              }
+            ],
+            "total": 2
+          }
+        ],
+        "properties": {
+          "items": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/AuditRecord"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "total": {
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "total"
+        ],
+        "title": "AuditPage",
+        "type": "object"
+      },
+      "AuditRecord": {
+        "properties": {
+          "action": {
+            "title": "Action",
+            "type": "string"
+          },
+          "actor": {
+            "title": "Actor",
+            "type": "string"
+          },
+          "detail": {
+            "additionalProperties": true,
+            "default": {},
+            "title": "Detail",
+            "type": "object"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "request_id": {
+            "default": "",
+            "title": "Request Id",
+            "type": "string"
+          },
+          "target_id": {
+            "title": "Target Id",
+            "type": "string"
+          },
+          "target_type": {
+            "title": "Target Type",
+            "type": "string"
+          },
+          "ts": {
+            "title": "Ts",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "ts",
+          "actor",
+          "action",
+          "target_type",
+          "target_id"
+        ],
+        "title": "AuditRecord",
+        "type": "object"
+      },
+      "Body_revise_resume_resume_revise_post": {
+        "properties": {
+          "file": {
+            "contentMediaType": "application/octet-stream",
+            "description": "文本型 .pdf / .docx，≤8MB",
+            "title": "File",
+            "type": "string"
+          },
+          "student_id": {
+            "default": "",
+            "description": "可选：关联学生，用于权限校验",
+            "examples": [
+              "202210700001"
+            ],
+            "title": "Student Id",
+            "type": "string"
+          },
+          "target_role": {
+            "default": "",
+            "description": "目标岗位",
+            "examples": [
+              "Java 后端开发工程师"
+            ],
+            "title": "Target Role",
+            "type": "string"
+          }
+        },
+        "required": [
+          "file"
+        ],
+        "title": "Body_revise_resume_resume_revise_post",
+        "type": "object"
+      },
+      "Body_revise_resume_stream_resume_revise_stream_post": {
+        "properties": {
+          "file": {
+            "contentMediaType": "application/octet-stream",
+            "title": "File",
+            "type": "string"
+          },
+          "student_id": {
+            "default": "",
+            "title": "Student Id",
+            "type": "string"
+          },
+          "target_role": {
+            "default": "",
+            "title": "Target Role",
+            "type": "string"
+          }
+        },
+        "required": [
+          "file"
+        ],
+        "title": "Body_revise_resume_stream_resume_revise_stream_post",
+        "type": "object"
+      },
+      "Bullet": {
+        "properties": {
+          "source": {
+            "default": "mock",
+            "enum": [
+              "db",
+              "mock",
+              "derived",
+              "llm",
+              "manual"
+            ],
+            "title": "Source",
+            "type": "string"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "title": "Bullet",
+        "type": "object"
+      },
+      "Course": {
+        "properties": {
+          "credit": {
+            "default": 0.0,
+            "title": "Credit",
+            "type": "number"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "score": {
+            "title": "Score",
+            "type": "number"
+          }
+        },
+        "required": [
+          "name",
+          "score"
+        ],
+        "title": "Course",
+        "type": "object"
+      },
+      "DecisionRequest": {
+        "properties": {
+          "reason": {
+            "default": "",
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "title": "DecisionRequest",
+        "type": "object"
+      },
+      "Education": {
+        "properties": {
+          "courses": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Courses",
+            "type": "array"
+          },
+          "degree": {
+            "default": "",
+            "title": "Degree",
+            "type": "string"
+          },
+          "end": {
+            "default": "",
+            "title": "End",
+            "type": "string"
+          },
+          "gpa": {
+            "default": "",
+            "title": "Gpa",
+            "type": "string"
+          },
+          "major": {
+            "default": "",
+            "title": "Major",
+            "type": "string"
+          },
+          "rank": {
+            "default": "",
+            "title": "Rank",
+            "type": "string"
+          },
+          "school": {
+            "default": "",
+            "title": "School",
+            "type": "string"
+          },
+          "start": {
+            "default": "",
+            "title": "Start",
+            "type": "string"
+          }
+        },
+        "title": "Education",
+        "type": "object"
+      },
+      "ErrorResponse": {
+        "properties": {
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "hint": {
+            "default": "",
+            "title": "Hint",
+            "type": "string"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ],
+        "title": "ErrorResponse",
+        "type": "object"
+      },
+      "Experience": {
+        "properties": {
+          "bullets": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/Bullet"
+            },
+            "title": "Bullets",
+            "type": "array"
+          },
+          "end": {
+            "default": "",
+            "title": "End",
+            "type": "string"
+          },
+          "org": {
+            "default": "",
+            "title": "Org",
+            "type": "string"
+          },
+          "start": {
+            "default": "",
+            "title": "Start",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title"
+        ],
+        "title": "Experience",
+        "type": "object"
+      },
+      "Finding": {
+        "properties": {
+          "evidence": {
+            "default": "",
+            "title": "Evidence",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "original": {
+            "title": "Original",
+            "type": "string"
+          },
+          "rule": {
+            "title": "Rule",
+            "type": "string"
+          },
+          "severity": {
+            "default": "medium",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ],
+            "title": "Severity",
+            "type": "string"
+          }
+        },
+        "required": [
+          "rule",
+          "name",
+          "original"
+        ],
+        "title": "Finding",
+        "type": "object"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "title": "Detail",
+            "type": "array"
+          }
+        },
+        "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "Health": {
+        "properties": {
+          "data_mode": {
+            "title": "Data Mode",
+            "type": "string"
+          },
+          "llm_ready": {
+            "title": "Llm Ready",
+            "type": "boolean"
+          },
+          "model": {
+            "title": "Model",
+            "type": "string"
+          },
+          "polish_enabled": {
+            "title": "Polish Enabled",
+            "type": "boolean"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "store_backend": {
+            "default": "json",
+            "title": "Store Backend",
+            "type": "string"
+          },
+          "students": {
+            "title": "Students",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "status",
+          "llm_ready",
+          "polish_enabled",
+          "model",
+          "data_mode",
+          "students"
+        ],
+        "title": "Health",
+        "type": "object"
+      },
+      "QualityReport": {
+        "properties": {
+          "findings": {
+            "default": 0,
+            "title": "Findings",
+            "type": "integer"
+          },
+          "keyword_coverage": {
+            "default": 0.0,
+            "title": "Keyword Coverage",
+            "type": "number"
+          },
+          "missing_keywords": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Missing Keywords",
+            "type": "array"
+          },
+          "rules_version": {
+            "default": 0,
+            "title": "Rules Version",
+            "type": "integer"
+          },
+          "score": {
+            "default": 100,
+            "title": "Score",
+            "type": "integer"
+          }
+        },
+        "title": "QualityReport",
+        "type": "object"
+      },
+      "ResumeDoc": {
+        "properties": {
+          "awards": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Awards",
+            "type": "array"
+          },
+          "certificates": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Certificates",
+            "type": "array"
+          },
+          "confirmed": {
+            "default": false,
+            "title": "Confirmed",
+            "type": "boolean"
+          },
+          "created_at": {
+            "default": "",
+            "title": "Created At",
+            "type": "string"
+          },
+          "created_by": {
+            "default": "",
+            "title": "Created By",
+            "type": "string"
+          },
+          "education": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Education"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "email": {
+            "default": "",
+            "title": "Email",
+            "type": "string"
+          },
+          "gender": {
+            "default": "",
+            "title": "Gender",
+            "type": "string"
+          },
+          "id": {
+            "default": "",
+            "title": "Id",
+            "type": "string"
+          },
+          "internships": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/Experience"
+            },
+            "title": "Internships",
+            "type": "array"
+          },
+          "name": {
+            "default": "",
+            "title": "Name",
+            "type": "string"
+          },
+          "needs_review": {
+            "default": false,
+            "title": "Needs Review",
+            "type": "boolean"
+          },
+          "phone": {
+            "default": "",
+            "title": "Phone",
+            "type": "string"
+          },
+          "projects": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/Experience"
+            },
+            "title": "Projects",
+            "type": "array"
+          },
+          "skills": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Skills",
+            "type": "array"
+          },
+          "sources": {
+            "additionalProperties": {
+              "enum": [
+                "db",
+                "mock",
+                "derived",
+                "llm",
+                "manual"
+              ],
+              "type": "string"
+            },
+            "default": {},
+            "title": "Sources",
+            "type": "object"
+          },
+          "student_id": {
+            "default": "",
+            "title": "Student Id",
+            "type": "string"
+          },
+          "summary": {
+            "default": "",
+            "title": "Summary",
+            "type": "string"
+          },
+          "target_role": {
+            "default": "",
+            "title": "Target Role",
+            "type": "string"
+          },
+          "template": {
+            "default": "",
+            "title": "Template",
+            "type": "string"
+          },
+          "version": {
+            "default": 1,
+            "title": "Version",
+            "type": "integer"
+          }
+        },
+        "title": "ResumeDoc",
+        "type": "object"
+      },
+      "ResumePatch": {
+        "properties": {
+          "awards": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Awards"
+          },
+          "certificates": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Certificates"
+          },
+          "confirm": {
+            "default": false,
+            "title": "Confirm",
+            "type": "boolean"
+          },
+          "internships": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/Experience"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Internships"
+          },
+          "note": {
+            "default": "",
+            "title": "Note",
+            "type": "string"
+          },
+          "projects": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/Experience"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Projects"
+          },
+          "skills": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Skills"
+          },
+          "summary": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Summary"
+          },
+          "target_role": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target Role"
+          }
+        },
+        "title": "ResumePatch",
+        "type": "object"
+      },
+      "RuleCatalog": {
+        "properties": {
+          "jd_version": {
+            "default": 0,
+            "title": "Jd Version",
+            "type": "integer"
+          },
+          "rules": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Rules",
+            "type": "array"
+          },
+          "thresholds": {
+            "additionalProperties": true,
+            "title": "Thresholds",
+            "type": "object"
+          },
+          "version": {
+            "title": "Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "version"
+        ],
+        "title": "RuleCatalog",
+        "type": "object"
+      },
+      "StudentBrief": {
+        "properties": {
+          "class_name": {
+            "default": "",
+            "title": "Class Name",
+            "type": "string"
+          },
+          "degree": {
+            "default": "",
+            "title": "Degree",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "major": {
+            "default": "",
+            "title": "Major",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "StudentBrief",
+        "type": "object"
+      },
+      "StudentProfile": {
+        "properties": {
+          "awards": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Awards",
+            "type": "array"
+          },
+          "certificates": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Certificates",
+            "type": "array"
+          },
+          "cet4": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cet4"
+          },
+          "cet6": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cet6"
+          },
+          "class_name": {
+            "default": "",
+            "title": "Class Name",
+            "type": "string"
+          },
+          "college": {
+            "default": "",
+            "title": "College",
+            "type": "string"
+          },
+          "courses": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/Course"
+            },
+            "title": "Courses",
+            "type": "array"
+          },
+          "degree": {
+            "default": "",
+            "title": "Degree",
+            "type": "string"
+          },
+          "email": {
+            "default": "",
+            "title": "Email",
+            "type": "string"
+          },
+          "enroll_year": {
+            "default": "",
+            "title": "Enroll Year",
+            "type": "string"
+          },
+          "gender": {
+            "default": "",
+            "title": "Gender",
+            "type": "string"
+          },
+          "gpa": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gpa"
+          },
+          "grad_year": {
+            "default": "",
+            "title": "Grad Year",
+            "type": "string"
+          },
+          "hometown": {
+            "default": "",
+            "title": "Hometown",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "internships": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/Experience"
+            },
+            "title": "Internships",
+            "type": "array"
+          },
+          "job_category": {
+            "default": "",
+            "title": "Job Category",
+            "type": "string"
+          },
+          "major": {
+            "default": "",
+            "title": "Major",
+            "type": "string"
+          },
+          "major_direction": {
+            "default": "",
+            "title": "Major Direction",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "phone": {
+            "default": "",
+            "title": "Phone",
+            "type": "string"
+          },
+          "projects": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/Experience"
+            },
+            "title": "Projects",
+            "type": "array"
+          },
+          "rank": {
+            "default": "",
+            "title": "Rank",
+            "type": "string"
+          },
+          "school": {
+            "default": "",
+            "title": "School",
+            "type": "string"
+          },
+          "skills": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Skills",
+            "type": "array"
+          },
+          "sources": {
+            "additionalProperties": {
+              "enum": [
+                "db",
+                "mock",
+                "derived",
+                "llm",
+                "manual"
+              ],
+              "type": "string"
+            },
+            "default": {},
+            "title": "Sources",
+            "type": "object"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "StudentProfile",
+        "type": "object"
+      },
+      "Suggestion": {
+        "properties": {
+          "accepted": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Accepted"
+          },
+          "decided_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Decided At"
+          },
+          "decided_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Decided By"
+          },
+          "id": {
+            "default": "",
+            "title": "Id",
+            "type": "string"
+          },
+          "original": {
+            "title": "Original",
+            "type": "string"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          },
+          "revised": {
+            "title": "Revised",
+            "type": "string"
+          },
+          "rule": {
+            "title": "Rule",
+            "type": "string"
+          },
+          "rules": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Rules",
+            "type": "array"
+          }
+        },
+        "required": [
+          "rule",
+          "original",
+          "revised",
+          "reason"
+        ],
+        "title": "Suggestion",
+        "type": "object"
+      },
+      "Template": {
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "sections": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Sections",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "sections"
+        ],
+        "title": "Template",
+        "type": "object"
+      },
+      "ValidationError": {
+        "properties": {
+          "ctx": {
+            "title": "Context",
+            "type": "object"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "title": "Location",
+            "type": "array"
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError",
+        "type": "object"
+      },
+      "VersionSummary": {
+        "properties": {
+          "confirmed": {
+            "default": false,
+            "title": "Confirmed",
+            "type": "boolean"
+          },
+          "created_at": {
+            "title": "Created At",
+            "type": "string"
+          },
+          "created_by": {
+            "default": "",
+            "title": "Created By",
+            "type": "string"
+          },
+          "note": {
+            "default": "",
+            "title": "Note",
+            "type": "string"
+          },
+          "version": {
+            "title": "Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "version",
+          "created_at"
+        ],
+        "title": "VersionSummary",
+        "type": "object"
+      },
+      "WriteRequest": {
+        "examples": [
+          {
+            "student_id": "202210700001",
+            "target_role": "Java 后端开发工程师",
+            "template_id": "general"
+          }
+        ],
+        "properties": {
+          "student_id": {
+            "description": "学号，例如 202210700001",
+            "title": "Student Id",
+            "type": "string"
+          },
+          "target_role": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "目标岗位，留空按专业方向推断",
+            "title": "Target Role"
+          },
+          "template_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "tech / general / soe，留空按岗位自动匹配",
+            "title": "Template Id"
+          }
+        },
+        "required": [
+          "student_id"
+        ],
+        "title": "WriteRequest",
+        "type": "object"
+      },
+      "WriteResponse": {
+        "examples": [
+          {
+            "doc": {
+              "awards": [
+                "校级一等奖学金"
+              ],
+              "certificates": [
+                "CET-4 528",
+                "软件设计师（中级）"
+              ],
+              "confirmed": false,
+              "created_at": "2026-11-17T16:10:00",
+              "created_by": "teacher_001",
+              "education": {
+                "courses": [
+                  "Java 程序设计",
+                  "软件工程",
+                  "机器学习基础"
+                ],
+                "degree": "本科",
+                "end": "2026.06",
+                "gpa": "3.57/4.0",
+                "major": "计算机科学与技术",
+                "rank": "28/96",
+                "school": "西安理工大学",
+                "start": "2022.09"
+              },
+              "email": "graduate001@example.com",
+              "gender": "男",
+              "id": "res_20261117161000_ab12cd",
+              "internships": [],
+              "name": "张晨",
+              "needs_review": false,
+              "phone": "138****0001",
+              "projects": [
+                {
+                  "bullets": [
+                    {
+                      "source": "mock",
+                      "text": "基于 Spring Boot + Vue 实现商品发布、检索与订单流程，覆盖 3 个学院 1200+ 注册用户"
+                    }
+                  ],
+                  "end": "",
+                  "org": "课程设计",
+                  "start": "",
+                  "title": "校园二手交易平台"
+                }
+              ],
+              "skills": [
+                "Java",
+                "Spring Boot",
+                "MySQL",
+                "Redis",
+                "Docker",
+                "Git"
+              ],
+              "sources": {
+                "gpa": "mock",
+                "name": "db",
+                "summary": "derived"
+              },
+              "student_id": "202210700001",
+              "summary": "",
+              "target_role": "Java 后端开发工程师",
+              "template": "tech",
+              "version": 1
+            },
+            "llm_ready": true,
+            "llm_used": false,
+            "resume_id": "res_20261117161000_ab12cd",
+            "template": {
+              "id": "tech",
+              "name": "技术岗 · 单页",
+              "sections": [
+                "education",
+                "skills",
+                "projects",
+                "internships",
+                "certificates",
+                "awards"
+              ]
+            }
+          }
+        ],
+        "properties": {
+          "doc": {
+            "$ref": "#/components/schemas/ResumeDoc"
+          },
+          "llm_ready": {
+            "title": "Llm Ready",
+            "type": "boolean"
+          },
+          "llm_used": {
+            "title": "Llm Used",
+            "type": "boolean"
+          },
+          "resume_id": {
+            "title": "Resume Id",
+            "type": "string"
+          },
+          "template": {
+            "$ref": "#/components/schemas/Template"
+          }
+        },
+        "required": [
+          "resume_id",
+          "template",
+          "doc",
+          "llm_ready",
+          "llm_used"
+        ],
+        "title": "WriteResponse",
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "APIKeyHeader": {
+        "description": "演示身份：teacher_001（全量）/ teacher_002（前缀范围）/ student_001（仅本人）",
+        "in": "header",
+        "name": "X-User-Id",
+        "type": "apiKey"
+      }
+    }
+  },
+  "info": {
+    "description": "5.1 简历撰写 + 5.2 简历修改。默认不调用模型；身份通过 X-User-Id 传入。",
+    "title": "鹏程 · 就业指导模块2（简历优化）",
+    "version": "0.3.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/audit": {
+      "get": {
+        "operationId": "list_audit_audit_get",
+        "parameters": [
+          {
+            "description": "操作人 ID",
+            "in": "query",
+            "name": "actor",
+            "required": false,
+            "schema": {
+              "default": "",
+              "description": "操作人 ID",
+              "examples": [
+                "teacher_001"
+              ],
+              "title": "Actor",
+              "type": "string"
+            }
+          },
+          {
+            "description": "动作",
+            "in": "query",
+            "name": "action",
+            "required": false,
+            "schema": {
+              "default": "",
+              "description": "动作",
+              "examples": [
+                "resume.patch",
+                "auth.denied"
+              ],
+              "title": "Action",
+              "type": "string"
+            }
+          },
+          {
+            "description": "对象 ID（简历/分析/学号）",
+            "in": "query",
+            "name": "target_id",
+            "required": false,
+            "schema": {
+              "default": "",
+              "description": "对象 ID（简历/分析/学号）",
+              "examples": [
+                "res_20261117161000_ab12cd"
+              ],
+              "title": "Target Id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "起始时间，ISO 前缀",
+            "in": "query",
+            "name": "since",
+            "required": false,
+            "schema": {
+              "default": "",
+              "description": "起始时间，ISO 前缀",
+              "examples": [
+                "2026-11-17"
+              ],
+              "title": "Since",
+              "type": "string"
+            }
+          },
+          {
+            "description": "截止时间，ISO 前缀",
+            "in": "query",
+            "name": "until",
+            "required": false,
+            "schema": {
+              "default": "",
+              "description": "截止时间，ISO 前缀",
+              "examples": [
+                "2026-11-18"
+              ],
+              "title": "Until",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 200,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuditPage"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "HTTP 403"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "审计日志查询（操作人/动作/对象/时间/分页）",
+        "tags": [
+          "审计"
+        ]
+      }
+    },
+    "/health": {
+      "get": {
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Health"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "健康检查",
+        "tags": [
+          "元数据"
+        ]
+      }
+    },
+    "/resume/revise": {
+      "post": {
+        "operationId": "revise_resume_resume_revise_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_revise_resume_resume_revise_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Analysis"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "HTTP 403"
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "HTTP 415"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "HTTP 422"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "5.2 上传简历并逐条给出修改建议",
+        "tags": [
+          "简历修改"
+        ]
+      }
+    },
+    "/resume/revise/stream": {
+      "post": {
+        "operationId": "revise_resume_stream_resume_revise_stream_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_revise_resume_stream_resume_revise_stream_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "text/event-stream": {
+                "examples": {
+                  "revise_stream": {
+                    "summary": "修改流",
+                    "value": "event: stage\ndata: {\"stage\": \"diagnose\"}\n\nevent: finding\ndata: {\"rule\": \"R2\", \"name\": \"弱动词开头\", \"severity\": \"medium\", \"original\": \"负责用户调研并输出需求文档\", \"evidence\": \"以弱动词开头\"}\n\nevent: stage\ndata: {\"stage\": \"suggest\"}\n\nevent: suggestion\ndata: {\"id\": \"s1\", \"rule\": \"R2\", \"original\": \"负责用户调研并输出需求文档\", \"revised\": \"主导用户调研并输出需求文档\", \"reason\": \"动词开头\"}\n\nevent: done\ndata: {\"id\": \"anl_20261117161200_9f8e7d\", \"revised_text\": \"主导用户调研并输出需求文档\", \"quality\": {\"score\": 46}}\n\n"
+                  },
+                  "write_stream": {
+                    "summary": "撰写流",
+                    "value": "event: stage\ndata: {\"stage\": \"load\"}\n\nevent: stage\ndata: {\"stage\": \"assemble\"}\n\nevent: done\ndata: {\"resume_id\": \"res_20261117161000_ab12cd\", \"template\": {\"id\": \"tech\", \"name\": \"技术岗 · 单页\", \"sections\": []}, \"llm_used\": false}\n\n"
+                  }
+                },
+                "schema": {
+                  "description": "SSE 原始事件流",
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Server-Sent Events。每条消息格式为 `event: <name>\\ndata: <json>\\n\\n`。撰写流：stage(load) → stage(assemble) → done；修改流：stage(diagnose) → finding×n → stage(suggest) → suggestion×n → done。"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "HTTP 403"
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "HTTP 415"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "HTTP 422"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "5.2 流式修改（SSE：stage/finding/suggestion/done）",
+        "tags": [
+          "简历修改"
+        ]
+      }
+    },
+    "/resume/rules": {
+      "get": {
+        "operationId": "list_rules_resume_rules_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RuleCatalog"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "诊断规则与阈值（含版本号）",
+        "tags": [
+          "元数据"
+        ]
+      }
+    },
+    "/resume/templates": {
+      "get": {
+        "operationId": "list_templates_resume_templates_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Template"
+                  },
+                  "title": "Response List Templates Resume Templates Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "简历模板列表",
+        "tags": [
+          "元数据"
+        ]
+      }
+    },
+    "/resume/write": {
+      "post": {
+        "operationId": "write_resume_resume_write_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WriteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WriteResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "HTTP 403"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "HTTP 404"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "HTTP 503"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "5.1 按学生信息生成简历（默认不调用模型）",
+        "tags": [
+          "简历撰写"
+        ]
+      }
+    },
+    "/resume/write/stream": {
+      "post": {
+        "operationId": "write_resume_stream_resume_write_stream_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WriteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "text/event-stream": {
+                "examples": {
+                  "revise_stream": {
+                    "summary": "修改流",
+                    "value": "event: stage\ndata: {\"stage\": \"diagnose\"}\n\nevent: finding\ndata: {\"rule\": \"R2\", \"name\": \"弱动词开头\", \"severity\": \"medium\", \"original\": \"负责用户调研并输出需求文档\", \"evidence\": \"以弱动词开头\"}\n\nevent: stage\ndata: {\"stage\": \"suggest\"}\n\nevent: suggestion\ndata: {\"id\": \"s1\", \"rule\": \"R2\", \"original\": \"负责用户调研并输出需求文档\", \"revised\": \"主导用户调研并输出需求文档\", \"reason\": \"动词开头\"}\n\nevent: done\ndata: {\"id\": \"anl_20261117161200_9f8e7d\", \"revised_text\": \"主导用户调研并输出需求文档\", \"quality\": {\"score\": 46}}\n\n"
+                  },
+                  "write_stream": {
+                    "summary": "撰写流",
+                    "value": "event: stage\ndata: {\"stage\": \"load\"}\n\nevent: stage\ndata: {\"stage\": \"assemble\"}\n\nevent: done\ndata: {\"resume_id\": \"res_20261117161000_ab12cd\", \"template\": {\"id\": \"tech\", \"name\": \"技术岗 · 单页\", \"sections\": []}, \"llm_used\": false}\n\n"
+                  }
+                },
+                "schema": {
+                  "description": "SSE 原始事件流",
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Server-Sent Events。每条消息格式为 `event: <name>\\ndata: <json>\\n\\n`。撰写流：stage(load) → stage(assemble) → done；修改流：stage(diagnose) → finding×n → stage(suggest) → suggestion×n → done。"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "HTTP 403"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "HTTP 404"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "HTTP 503"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "5.1 流式生成（SSE）",
+        "tags": [
+          "简历撰写"
+        ]
+      }
+    },
+    "/resume/{resume_id}": {
+      "get": {
+        "operationId": "get_resume_resume__resume_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "resume_id",
+            "required": true,
+            "schema": {
+              "title": "Resume Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/ResumeDoc"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Analysis"
+                    }
+                  ],
+                  "title": "Response Get Resume Resume  Resume Id  Get"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "HTTP 404"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "读取简历或修改记录",
+        "tags": [
+          "简历撰写"
+        ]
+      },
+      "patch": {
+        "operationId": "patch_resume_resume__resume_id__patch",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "resume_id",
+            "required": true,
+            "schema": {
+              "title": "Resume Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResumePatch"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResumeDoc"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "HTTP 403"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "HTTP 404"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "HTTP 409"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "人工编辑（生成新版本，记录操作人）",
+        "tags": [
+          "简历撰写"
+        ]
+      }
+    },
+    "/resume/{resume_id}/export": {
+      "get": {
+        "operationId": "export_resume_resume__resume_id__export_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "resume_id",
+            "required": true,
+            "schema": {
+              "title": "Resume Id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "导出格式",
+            "in": "query",
+            "name": "format",
+            "required": false,
+            "schema": {
+              "default": "docx",
+              "description": "导出格式",
+              "enum": [
+                "docx",
+                "pdf"
+              ],
+              "title": "Format",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/pdf": {},
+              "application/vnd.openxmlformats-officedocument.wordprocessingml.document": {}
+            },
+            "description": "简历文件"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "HTTP 403"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "HTTP 404"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "导出 docx / pdf",
+        "tags": [
+          "导出"
+        ]
+      }
+    },
+    "/resume/{resume_id}/suggestions/{suggestion_id}/accept": {
+      "post": {
+        "operationId": "accept_suggestion_resume__resume_id__suggestions__suggestion_id__accept_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "resume_id",
+            "required": true,
+            "schema": {
+              "title": "Resume Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "suggestion_id",
+            "required": true,
+            "schema": {
+              "title": "Suggestion Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/DecisionRequest"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Analysis"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "HTTP 403"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "HTTP 404"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "采纳建议并重算美化稿",
+        "tags": [
+          "简历修改"
+        ]
+      }
+    },
+    "/resume/{resume_id}/suggestions/{suggestion_id}/reject": {
+      "post": {
+        "operationId": "reject_suggestion_resume__resume_id__suggestions__suggestion_id__reject_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "resume_id",
+            "required": true,
+            "schema": {
+              "title": "Resume Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "suggestion_id",
+            "required": true,
+            "schema": {
+              "title": "Suggestion Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/DecisionRequest"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Analysis"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "HTTP 403"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "HTTP 404"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "驳回建议并重算美化稿",
+        "tags": [
+          "简历修改"
+        ]
+      }
+    },
+    "/resume/{resume_id}/versions": {
+      "get": {
+        "operationId": "get_versions_resume__resume_id__versions_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "resume_id",
+            "required": true,
+            "schema": {
+              "title": "Resume Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/VersionSummary"
+                  },
+                  "title": "Response Get Versions Resume  Resume Id  Versions Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "HTTP 403"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "HTTP 404"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "版本历史",
+        "tags": [
+          "简历撰写"
+        ]
+      }
+    },
+    "/students": {
+      "get": {
+        "operationId": "list_students_students_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "q",
+            "required": false,
+            "schema": {
+              "default": "",
+              "title": "Q",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/StudentBrief"
+                  },
+                  "title": "Response List Students Students Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "HTTP 503"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "学生检索（姓名/学号/专业/班级）",
+        "tags": [
+          "学生"
+        ]
+      }
+    },
+    "/students/{student_id}": {
+      "get": {
+        "operationId": "get_student_students__student_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "student_id",
+            "required": true,
+            "schema": {
+              "title": "Student Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudentProfile"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "HTTP 403"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "HTTP 404"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "HTTP 503"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "学生画像（含每字段来源 db/mock）",
+        "tags": [
+          "学生"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "description": "学生检索与画像（字段级来源：db/mock）",
+      "name": "学生"
+    },
+    {
+      "description": "5.1 生成、编辑、版本、导出",
+      "name": "简历撰写"
+    },
+    {
+      "description": "5.2 上传诊断、逐条建议、采纳/驳回",
+      "name": "简历修改"
+    },
+    {
+      "description": "docx / pdf",
+      "name": "导出"
+    },
+    {
+      "description": "操作留痕查询，仅辅导员/管理员",
+      "name": "审计"
+    },
+    {
+      "description": "健康检查、模板、规则清单",
+      "name": "元数据"
+    }
+  ]
+}
