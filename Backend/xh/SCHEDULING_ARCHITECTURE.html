@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>学海模块调度架构说明</title>
+  <style>
+    :root {
+      --ink: #18231f;
+      --muted: #66736d;
+      --paper: #f4f2eb;
+      --card: #fffefa;
+      --line: #d9ddd8;
+      --green: #176b51;
+      --green-soft: #e8f3ee;
+      --amber: #b56d16;
+      --amber-soft: #fff4df;
+      --red: #a23c36;
+      --shadow: 0 18px 55px rgba(28, 43, 37, .08);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(23,107,81,.09), transparent 30rem),
+        var(--paper);
+      font: 16px/1.75 "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+    }
+    .layout { display: grid; grid-template-columns: 260px minmax(0, 900px); gap: 36px; max-width: 1240px; margin: 0 auto; padding: 30px 24px 70px; }
+    aside { position: sticky; top: 24px; align-self: start; max-height: calc(100vh - 48px); overflow: auto; }
+    .brand { padding: 20px; color: white; background: var(--green); border-radius: 20px; box-shadow: var(--shadow); }
+    .brand small { opacity: .7; letter-spacing: .12em; }
+    .brand strong { display: block; margin-top: 8px; font-size: 24px; }
+    nav { margin-top: 18px; padding: 10px; background: rgba(255,255,255,.55); border: 1px solid rgba(255,255,255,.8); border-radius: 18px; }
+    nav a { display: block; padding: 8px 11px; color: #42504a; text-decoration: none; border-radius: 10px; font-size: 14px; }
+    nav a:hover { color: var(--green); background: var(--green-soft); }
+    main { min-width: 0; }
+    .hero { padding: 46px 48px; color: white; background: linear-gradient(135deg, #123f34, #176b51 65%, #28856a); border-radius: 28px; box-shadow: var(--shadow); }
+    .eyebrow { margin: 0 0 10px; text-transform: uppercase; letter-spacing: .15em; opacity: .7; font-size: 12px; }
+    h1 { margin: 0; font-size: clamp(34px, 6vw, 58px); line-height: 1.1; letter-spacing: -.04em; }
+    .hero p { max-width: 650px; margin: 22px 0 0; color: #d9eee7; font-size: 18px; }
+    .meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+    .meta span { padding: 6px 12px; border: 1px solid rgba(255,255,255,.25); border-radius: 999px; font-size: 13px; }
+    section { margin-top: 28px; padding: 34px 38px; background: var(--card); border: 1px solid rgba(24,35,31,.08); border-radius: 24px; box-shadow: var(--shadow); }
+    h2 { margin: 0 0 18px; color: #123f34; font-size: 28px; line-height: 1.25; }
+    h3 { margin: 28px 0 10px; font-size: 19px; }
+    p { margin: 10px 0; }
+    .lead { color: #30423b; font-size: 19px; }
+    code { padding: 2px 6px; color: #145b46; background: #eef4f1; border-radius: 6px; font-family: Consolas, monospace; font-size: .9em; }
+    pre { overflow: auto; padding: 20px; color: #e8f5ef; background: #14251f; border-radius: 16px; line-height: 1.55; }
+    pre code { padding: 0; color: inherit; background: none; }
+    table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 14px; }
+    th, td { padding: 12px 14px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { color: #315c4d; background: #eef4f1; }
+    tr:last-child td { border-bottom: 0; }
+    ul, ol { padding-left: 22px; }
+    li + li { margin-top: 5px; }
+    .callout { margin: 18px 0; padding: 16px 18px; background: var(--green-soft); border-left: 4px solid var(--green); border-radius: 0 12px 12px 0; }
+    .warning { background: var(--amber-soft); border-left-color: var(--amber); }
+    .flow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 22px 0; }
+    .node { flex: 1 1 135px; min-height: 76px; display: grid; place-items: center; padding: 12px; text-align: center; background: #f7faf8; border: 1px solid #bfd4ca; border-radius: 14px; font-weight: 700; }
+    .node.external { border-color: #e5c48f; background: #fff9ef; }
+    .arrow { color: var(--green); font-size: 23px; font-weight: 800; }
+    .pipeline { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; counter-reset: step; }
+    .step { position: relative; min-height: 118px; padding: 17px 17px 15px 50px; background: #f7faf8; border: 1px solid var(--line); border-radius: 15px; }
+    .step::before { counter-increment: step; content: counter(step); position: absolute; top: 15px; left: 14px; width: 25px; height: 25px; display: grid; place-items: center; color: white; background: var(--green); border-radius: 50%; font-size: 12px; font-weight: 800; }
+    .step strong { display: block; margin-bottom: 5px; color: #184e3f; }
+    .step p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
+    .status { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+    .completed { color: #126044; background: #dff3e9; }
+    .partial { color: #8a5714; background: #fff0d0; }
+    .error { color: #8e302b; background: #f9e1df; }
+    .principle { padding: 25px; color: white; background: #18342b; border-radius: 18px; text-align: center; font-size: 19px; }
+    footer { padding: 30px 4px; color: var(--muted); text-align: center; font-size: 13px; }
+    @media (max-width: 900px) {
+      .layout { display: block; padding: 14px; }
+      aside { position: static; margin-bottom: 18px; }
+      nav { display: none; }
+      .hero { padding: 34px 25px; border-radius: 22px; }
+      section { padding: 26px 22px; }
+      .pipeline { grid-template-columns: 1fr; }
+      .arrow { transform: rotate(90deg); margin: auto; }
+    }
+    @media print {
+      body { background: white; }
+      .layout { display: block; max-width: none; padding: 0; }
+      aside { display: none; }
+      .hero, section { box-shadow: none; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside>
+      <div class="brand"><small>HEARTEASE GUARDIAN</small><strong>学海 · 调度架构</strong></div>
+      <nav aria-label="目录">
+        <a href="#overview">系统概览</a><a href="#position">系统位置</a><a href="#api">对外接口</a>
+        <a href="#schedule">调度流程</a><a href="#rules">指标与规则</a><a href="#degrade">降级策略</a>
+        <a href="#replace">替换点</a><a href="#files">目录职责</a><a href="#limits">当前限制</a>
+      </nav>
+    </aside>
+    <main>
+      <header class="hero">
+        <p class="eyebrow">Academic Agent · MVP Architecture</p>
+        <h1>学海模块<br>调度架构说明</h1>
+        <p>帮助新成员快速理解：主智能体如何调度学生画像智能体和学业问题研判智能体，并与外部问典、烽火协作，最终形成可追溯的结构化结果。</p>
+        <div class="meta"><span>第一阶段 MVP</span><span>单学生 · 单学期</span><span>同步串行编排</span><span>2026-11-18</span></div>
+      </header>
+
+      <section id="overview">
+        <h2>1. 一句话说明</h2>
+        <p class="lead">学海由一个主智能体调度两个内部子智能体，完成单学生、单学期的学业分析。</p>
+        <div class="callout">画像智能体负责看清现状；研判智能体负责判断问题；问典和烽火是学海外部模块。</div>
+        <pre><code>校验请求 → 生成调度计划 → 校验权限 → 读取学业数据
+→ 画像智能体生成画像 → 识别确定性问题
+→ 调用外部问典和烽火 → 研判智能体形成结论与建议
+→ 保存结果 → 写入审计 → 返回调用方</code></pre>
+        <p>当前流程在一次 HTTP 请求内同步完成，没有使用 Celery、Redis 或 LangGraph。</p>
+      </section>
+
+      <section id="position">
+        <h2>2. 系统位置与职责边界</h2>
+        <div class="flow">
+          <div class="node">辅导员</div><div class="arrow">→</div><div class="node">主智能体</div><div class="arrow">→</div>
+          <div class="node">学海主智能体</div><div class="arrow">→</div><div class="node">结构化结果</div>
+        </div>
+        <div class="flow">
+          <div class="node">学生画像智能体</div><div class="node">学业问题研判智能体</div>
+          <div class="node external">问典 · 外部制度模块</div><div class="node external">烽火 · 外部预警模块</div>
+          <div class="node external">数据源、存储与审计</div>
+        </div>
+        <table><thead><tr><th>组件</th><th>负责</th><th>不负责</th></tr></thead><tbody>
+          <tr><td>主智能体</td><td>理解问题、生成结构化任务、整合回复</td><td>不直接计算学业指标</td></tr>
+          <tr><td>学海主智能体</td><td>校验请求、生成计划、调度子智能体和外部模块、组装结果</td><td>不直接计算指标，不代替辅导员决策</td></tr>
+          <tr><td>学生画像智能体</td><td>生成指标、趋势、风险课程和完整性说明</td><td>不查询制度，不判断预警，不给出处置结论</td></tr>
+          <tr><td>学业问题研判智能体</td><td>综合画像、确定性问题、制度和预警形成研判</td><td>不修改画像、制度或烽火等级</td></tr>
+          <tr><td>问典</td><td>返回制度、版本、生效时间和来源</td><td>不决定预警等级</td></tr>
+          <tr><td>烽火</td><td>根据事实、问题和制度检测预警</td><td>不生成完整学业报告</td></tr>
+        </tbody></table>
+        <div class="callout warning">问典和烽火不属于学海。学海仅通过 Adapter 调用，不在内部复制其业务逻辑。</div>
+      </section>
+
+      <section id="api">
+        <h2>3. 对外接口</h2>
+        <h3>健康检查</h3><pre><code>GET /health</code></pre>
+        <h3>学业分析</h3><pre><code>POST /api/v1/agents/academic/analyze
+Content-Type: application/json</code></pre>
+        <table><thead><tr><th>字段</th><th>含义</th></tr></thead><tbody>
+          <tr><td><code>request_id</code></td><td>请求唯一标识，用于幂等</td></tr>
+          <tr><td><code>counselor_id</code></td><td>发起任务的辅导员</td></tr>
+          <tr><td><code>student_scope</code></td><td>当前仅支持一个学生</td></tr>
+          <tr><td><code>term</code></td><td>学期，例如 <code>2026-autumn</code></td></tr>
+          <tr><td><code>focus</code></td><td>成绩、考勤、学分</td></tr>
+          <tr><td><code>options</code></td><td>制度查询、预警检测及建议数量开关</td></tr>
+        </tbody></table>
+        <p>响应使用固定 Pydantic 结构，包含学生信息、数据快照、指标、问题、制度、预警、分析、建议和降级原因。</p>
+      </section>
+
+      <section id="schedule">
+        <h2>4. 当前调度流程</h2>
+        <p>核心调度位于 <code>AcademicService.analyze()</code>。</p>
+        <div class="pipeline">
+          <div class="step"><strong>请求校验</strong><p>Pydantic 校验单学生、学期格式、任务类型和建议数量。</p></div>
+          <div class="step"><strong>生成计划</strong><p>规则调度器确定学生、学期、关注数据和外部调用开关。</p></div>
+          <div class="step"><strong>权限校验</strong><p>确认辅导员可以访问目标学生，否则记录审计并返回 403。</p></div>
+          <div class="step"><strong>幂等检查</strong><p>权限通过后读取缓存；跨学生或学期复用 request_id 返回 409。</p></div>
+          <div class="step"><strong>读取事实</strong><p>获取学生、课程、成绩、考勤、学分及补考重修记录。</p></div>
+          <div class="step"><strong>生成画像</strong><p>画像智能体组织指标、趋势、风险课程、来源和缺失项。</p></div>
+          <div class="step"><strong>问题识别</strong><p>执行四条技术规则，返回 hit、miss 或 unknown。</p></div>
+          <div class="step"><strong>查询问典</strong><p>根据指标查询制度及其版本、时间和来源。</p></div>
+          <div class="step"><strong>调用烽火</strong><p>发送事实、问题和制度，接收正式预警结果。</p></div>
+          <div class="step"><strong>问题研判</strong><p>研判智能体基于画像、问题、制度和预警形成结论与建议。</p></div>
+          <div class="step"><strong>组装响应</strong><p>形成 completed 或 partial 的固定结构结果。</p></div>
+          <div class="step"><strong>保存评估</strong><p>写入 assessments.json，确保重复请求不重复执行。</p></div>
+          <div class="step"><strong>审计返回</strong><p>写入最小化审计摘要，然后返回主智能体。</p></div>
+        </div>
+        <h3>关键 HTTP 行为</h3>
+        <table><thead><tr><th>情况</th><th>结果</th></tr></thead><tbody>
+          <tr><td>请求字段非法</td><td>HTTP 422</td></tr><tr><td>无访问权限</td><td>HTTP 403</td></tr>
+          <tr><td>学生不存在</td><td>HTTP 404</td></tr><tr><td>request_id跨任务复用</td><td>HTTP 409</td></tr>
+          <tr><td>关键学业数据全部不可用</td><td>HTTP 503</td></tr>
+          <tr><td>部分数据或外部服务失败</td><td>HTTP 200，业务状态 <span class="status partial">partial</span></td></tr>
+        </tbody></table>
+      </section>
+
+      <section id="rules">
+        <h2>5. 画像、规则和研判边界</h2>
+        <h3>程序计算的指标</h3>
+        <p>本学期与上学期平均分、成绩变化、挂科数、核心课挂科数、缺勤、迟到、已获与应获学分、学分缺口、学分完成率、补考和重修数量。</p>
+        <h3>当前确定性规则</h3>
+        <table><thead><tr><th>问题</th><th>Mock 技术阈值</th></tr></thead><tbody>
+          <tr><td>多门课程不及格</td><td><code>failed_course_count &gt;= 2</code></td></tr>
+          <tr><td>考勤异常</td><td><code>absence_count &gt;= 5</code></td></tr>
+          <tr><td>学分进度落后</td><td><code>credit_completion_rate &lt; 0.85</code></td></tr>
+          <tr><td>成绩明显下降</td><td><code>average_score_change &lt;= -10</code></td></tr>
+        </tbody></table>
+        <div class="callout warning">这些阈值属于第一阶段技术配置，不代表正式学校制度。正式制度必须由问典返回。</div>
+        <h3>学生画像智能体</h3>
+        <ul><li>输入通过权限校验的可信学业事实；</li><li>使用确定性 Python 工具计算指标；</li><li>输出画像、趋势、风险课程、来源和缺失项；</li><li>不查询制度、不判断预警、不生成处置结论。</li></ul>
+        <h3>学业问题研判智能体</h3>
+        <ul><li>只接收画像、确定性问题、问典制度和烽火预警；</li><li>生成摘要、待核实假设、约谈问题和最多三条建议；</li><li>不得重算画像、伪造制度、修改烽火等级或把推测写成事实。</li></ul>
+        <div class="callout">当前两个子智能体分别使用规则和程序模板实现，尚未安装或调用 LangChain。</div>
+      </section>
+
+      <section id="degrade">
+        <h2>6. 降级策略</h2>
+        <table><thead><tr><th>失败场景</th><th>调度行为</th><th>状态</th></tr></thead><tbody>
+          <tr><td>问典失败</td><td>保留事实分析，制度列表为空，记录 WENDIAN_UNAVAILABLE</td><td><span class="status partial">partial</span></td></tr>
+          <tr><td>烽火失败</td><td>预警设为 unknown，记录 FENGHUO_UNAVAILABLE</td><td><span class="status partial">partial</span></td></tr>
+          <tr><td>研判智能体失败/格式非法</td><td>使用 TemplateAssessmentAgent 降级</td><td><span class="status partial">partial</span></td></tr>
+          <tr><td>部分数据缺失</td><td>对应指标为空，规则状态为 unknown</td><td><span class="status partial">partial</span></td></tr>
+          <tr><td>关键数据全部不可用</td><td>停止调度，返回 HTTP 503</td><td><span class="status error">错误</span></td></tr>
+          <tr><td>全部正常</td><td>保存完整评估并返回</td><td><span class="status completed">completed</span></td></tr>
+        </tbody></table>
+        <p><code>degradation_reasons</code> 会明确说明结果缺少了哪一部分能力。</p>
+      </section>
+
+      <section id="replace">
+        <h2>7. 依赖注入与替换点</h2>
+        <p>API 层的 <code>get_service()</code> 负责组装当前实现：</p>
+        <pre><code>MockAcademicDataSource
+RuleBasedAcademicCoordinator
+RuleBasedProfileAgent
+MockWendianAdapter
+MockFenghuoAdapter
+TemplateAssessmentAgent
+JsonAssessmentStore</code></pre>
+        <p>未来可逐项替换为真实实现，而不改变核心调度顺序：</p>
+        <pre><code>真实教务 / MySQL 数据源
+LangChain AcademicCoordinator（可选）
+LangChain AcademicProfileAgent（可选）
+问典 HTTP Adapter
+烽火 HTTP Adapter
+LangChain AcademicAssessmentAgent（可选）
+MySQL AssessmentStore</code></pre>
+      </section>
+
+      <section id="files">
+        <h2>8. 目录与职责</h2>
+        <pre><code>Backend/xh/
+├─ app/api/academic.py                 # HTTP 入口和依赖组装
+├─ app/domain/academic/service.py      # 核心调度器
+├─ app/agents/coordinator.py           # 主智能体调度接口及规则实现
+├─ app/agents/profile.py               # 学生画像智能体接口及规则实现
+├─ app/agents/assessment.py            # 学业问题研判接口及模板实现
+├─ app/domain/academic/indicators.py   # 确定性指标计算
+├─ app/domain/academic/findings.py     # 确定性问题规则
+├─ app/data/source.py                  # 数据源抽象
+├─ app/data/mock_source.py             # Mock 数据源
+├─ app/integrations/wendian.py         # 问典接口及 Mock
+├─ app/integrations/fenghuo.py         # 烽火接口及 Mock
+├─ app/storage/assessment_store.py     # 评估结果存储
+├─ app/audit.py                        # 审计记录
+├─ app/schemas/                        # 请求、响应和集成契约
+└─ tests/                              # 指标、规则、API、失败模式测试</code></pre>
+      </section>
+
+      <section id="limits">
+        <h2>9. 当前限制与上线前事项</h2>
+        <ol>
+          <li>数据源、问典和烽火当前使用 Mock；两个子智能体当前为规则/模板实现。</li>
+          <li>只支持单学生、单学期，不支持班级批量扫描。</li>
+          <li>同步串行调度会受到外部服务响应时间影响。</li>
+          <li>本地 JSON 存储不适合多实例并发部署。</li>
+          <li>当前幂等冲突校验学生和学期；正式环境可进一步保存完整请求指纹。</li>
+          <li>真实 HTTP Adapter 及其超时、重试尚未实现。</li>
+          <li><code>failed</code> 已预留，但关键失败目前主要通过 HTTP 错误返回。</li>
+        </ol>
+        <div class="principle">事实由数据源提供 · 画像由画像智能体组织 · 问题由确定性规则识别<br>制度由外部问典提供 · 预警由外部烽火决定 · 研判结果由辅导员最终复核</div>
+      </section>
+      <footer>学海 · 学业辅导模块第一阶段 MVP 调度架构</footer>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,97 @@
+{
+  "as_of": "2026-11-18T16:00:00+08:00",
+  "students": [
+    {
+      "student_id": "S001",
+      "name": "脱敏学生A",
+      "major": "计算机科学与技术",
+      "grade": "2024",
+      "class_name": "计科2401"
+    },
+    {
+      "student_id": "S002",
+      "name": "脱敏学生B",
+      "major": "计算机科学与技术",
+      "grade": "2024",
+      "class_name": "计科2401"
+    },
+    {
+      "student_id": "S003",
+      "name": "脱敏学生C",
+      "major": "计算机科学与技术",
+      "grade": "2024",
+      "class_name": "计科2402"
+    }
+  ],
+  "counselor_scopes": [
+    {"counselor_id": "T001", "student_id": "S001", "active": true},
+    {"counselor_id": "T001", "student_id": "S002", "active": true},
+    {"counselor_id": "T001", "student_id": "S003", "active": true},
+    {"counselor_id": "T001", "student_id": "S404", "active": true}
+  ],
+  "terms": [
+    {
+      "student_id": "S001",
+      "term": "2026-autumn",
+      "as_of": "2026-11-18T16:00:00+08:00",
+      "courses": [
+        {"course_id": "C101", "course_name": "高等数学", "course_type": "core", "credits": 4, "score": 58, "passed": false},
+        {"course_id": "C102", "course_name": "数据结构", "course_type": "core", "credits": 4, "score": 55, "passed": false},
+        {"course_id": "C103", "course_name": "大学物理", "course_type": "required", "credits": 3, "score": 59, "passed": false},
+        {"course_id": "C104", "course_name": "大学英语", "course_type": "required", "credits": 2, "score": 68, "passed": true},
+        {"course_id": "C105", "course_name": "程序设计", "course_type": "core", "credits": 4, "score": 72, "passed": true}
+      ],
+      "previous_courses": [
+        {"course_id": "P101", "score": 70},
+        {"course_id": "P102", "score": 72},
+        {"course_id": "P103", "score": 74},
+        {"course_id": "P104", "score": 76},
+        {"course_id": "P105", "score": 78}
+      ],
+      "attendance": [
+        {"course_id": "C101", "absence_count": 3, "late_count": 1, "leave_count": 0},
+        {"course_id": "C102", "absence_count": 3, "late_count": 2, "leave_count": 0},
+        {"course_id": "C103", "absence_count": 2, "late_count": 0, "leave_count": 1}
+      ],
+      "credits": {"earned_credits": 48, "expected_credits": 60, "required_credits": 160},
+      "remedial_records": [
+        {"course_id": "C101", "type": "remedial", "status": "pending", "attempts": 0},
+        {"course_id": "C102", "type": "retake", "status": "planned", "attempts": 1}
+      ],
+      "missing_fields": ["第4周某课程考勤记录"],
+      "sources": ["mock_grades", "mock_attendance", "mock_training_plan"]
+    },
+    {
+      "student_id": "S002",
+      "term": "2026-autumn",
+      "courses": [
+        {"course_id": "C101", "course_name": "高等数学", "course_type": "core", "credits": 4, "score": 82, "passed": true},
+        {"course_id": "C102", "course_name": "数据结构", "course_type": "core", "credits": 4, "score": 86, "passed": true}
+      ],
+      "previous_courses": [
+        {"course_id": "P101", "score": 80},
+        {"course_id": "P102", "score": 84}
+      ],
+      "attendance": [
+        {"course_id": "C101", "absence_count": 0, "late_count": 1, "leave_count": 0}
+      ],
+      "credits": {"earned_credits": 60, "expected_credits": 60, "required_credits": 160},
+      "remedial_records": [],
+      "missing_fields": [],
+      "sources": ["mock_grades", "mock_attendance", "mock_training_plan"]
+    },
+    {
+      "student_id": "S003",
+      "term": "2026-autumn",
+      "courses": [
+        {"course_id": "C101", "course_name": "高等数学", "course_type": "core", "credits": 4, "score": 76, "passed": true}
+      ],
+      "previous_courses": null,
+      "attendance": null,
+      "credits": null,
+      "remedial_records": null,
+      "missing_fields": ["previous_courses", "attendance", "credits", "remedial_records"],
+      "sources": ["mock_grades"]
+    }
+  ]
+}
